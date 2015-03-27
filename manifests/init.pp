@@ -35,7 +35,20 @@
 #
 # Copyright 2011 Your name here, unless otherwise noted.
 #
-class apache_wrapper {
+class apache_wrapper (
+  $vhosts = {},
+  ) inherits ::apache::params {
+include ::apache
 
-
+  $defaults = {
+	ensure          => present,
+	port            => 80,
+        docroot         => $::apache::params::docroot,
+        serveradmin     => 'alerts@emergemedia.com',
+	access_log_file => 'access_log',
+	priority	=> '15',
+	ip		=> undef,
+	logroot_mode	=> $::apache::params::logroot_mode,
+  }
+  create_resources(::apache:vhost, $vhosts, $defaults)
 }
