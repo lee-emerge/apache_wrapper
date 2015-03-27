@@ -50,5 +50,5 @@ include ::apache
 	ip		=> undef,
 	logroot_mode	=> $::apache::params::logroot_mode,
   }
-  create_resources(::apache:vhost, $vhosts, $defaults)
+  create_resources(::apache::vhost, $vhosts, $defaults)
 }
